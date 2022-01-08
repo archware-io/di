@@ -25,7 +25,9 @@
     "url": "https://github.com/archware-io/di/issues"
   },
   "homepage": "https://github.com/archware-io/di#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@abraham/reflection": "^0.8.0"
+  },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
