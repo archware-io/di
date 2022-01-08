@@ -1,4 +1,4 @@
-import { Descriptor } from './Descriptor';
+import type { Descriptor } from './Descriptor';
 
 export interface Registrable<T> {
   token: any;

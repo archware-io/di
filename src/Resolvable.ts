@@ -4,7 +4,7 @@ export const Resolvable = (): ClassDecorator => (target: any) => {
 
 const IS_DECORATED = Symbol('IS_DECORATED');
 
-export const setDecorated = (target: any) => {
+const setDecorated = (target: any) => {
   Object.defineProperty(target, IS_DECORATED, {
     value: true,
     configurable: false,

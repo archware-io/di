@@ -1,4 +1,4 @@
-import { Registrable } from './Registrable';
+import type { Registrable } from './Registrable';
 
 export class Injector {
   constructor(private registry = new Map<any, Registrable<any>>()) {}
