@@ -1,6 +1,12 @@
-export const Resolvable = (): ClassDecorator => (target: any) => {
-  setDecorated(target);
+type ResolvableOptions = {
+  singleton: boolean;
 };
+
+export const Resolvable =
+  (options: ResolvableOptions): ClassDecorator =>
+  (target: any) => {
+    setDecorated(target);
+  };
 
 const IS_DECORATED = Symbol('IS_DECORATED');
 
