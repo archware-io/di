@@ -1,10 +1,12 @@
-type ResolvableOptions = {
-  singleton: boolean;
-};
+import { ResolvableOptions, setOptions } from './ResolvableOptions';
 
 export const Resolvable =
-  (options: ResolvableOptions): ClassDecorator =>
+  (options?: ResolvableOptions): ClassDecorator =>
   (target: any) => {
+    if (options !== undefined) {
+      setOptions(target, options);
+    }
+
     setDecorated(target);
   };
 

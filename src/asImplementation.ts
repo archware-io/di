@@ -1,5 +1,6 @@
 import { Registrable } from './Registrable';
 import { mustGetParamtypes } from './Paramtypes';
+import { getOptions } from './ResolvableOptions';
 
 export const asImplementation = <T>(
   InterfaceClass: abstract new (...args: any[]) => T,
@@ -10,7 +11,7 @@ export const asImplementation = <T>(
     descriptor: {
       factory: (...args: ConstructorParameters<typeof ImplementationClass>) => new ImplementationClass(...args),
       dependencies: mustGetParamtypes(ImplementationClass),
-      isSingleton: false,
+      isSingleton: getOptions(ImplementationClass)?.singleton ?? false,
     },
   };
 };
