@@ -1,0 +1,37 @@
+{
+  "name": "@archware/di",
+  "version": "0.1.0",
+  "description": "Lightweight dependency injection for TypeScript",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/archware-io/di.git"
+  },
+  "keywords": [
+    "di",
+    "typescript"
+  ],
+  "author": {
+    "email": "dulowski.marek@gmail.com",
+    "name": "Marek Dulowski"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/archware-io/di/issues"
+  },
+  "homepage": "https://github.com/archware-io/di#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "eslint": "^8.6.0",
+    "jest": "^27.4.7",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
+  }
+}
