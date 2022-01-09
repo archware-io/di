@@ -154,4 +154,4 @@ Feel free to drop us a line at `marek@archware.io`
 Contributing guide will be prepared soon.
 
 ## License
-MIT, Copyright (c) 2022 Archware Limited and contributors
+MIT, Copyright &copy; 2022 Archware Limited and contributors
