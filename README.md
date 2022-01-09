@@ -20,7 +20,7 @@ principles this library aims to encourage.
 [InversifyJS](https://github.com/inversify/InversifyJS) is a well known IoC solution for TypeScript.
 Why create another instead of contributing?
 
-There are a few differences:
+There are a few differences that this project deliberately creates:
 
 #### It puts interfaces first  
 The goal is to encourage healthy project architecture and established principles.
