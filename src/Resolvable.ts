@@ -1,3 +1,4 @@
+import '@abraham/reflection';
 import { ResolvableOptions, setOptions } from './ResolvableOptions';
 
 export const Resolvable =

@@ -1,4 +1,3 @@
-import './polyfill';
 import { isDecorated } from './Resolvable';
 
 const getParamtypes = (target: any): any[] => {
