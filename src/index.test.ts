@@ -1,7 +1,5 @@
-import { Injector } from './Injector';
-import { Resolvable } from './Resolvable';
-import { asValue } from './asValue';
-import { asImplementation } from './asImplementation';
+import { Injector, Resolvable } from './index';
+import { asValue, asImplementation, asClass } from './register';
 
 describe("Injector", () => {
   test("resolve a class", () => {
@@ -10,6 +8,19 @@ describe("Injector", () => {
 
     @Resolvable()
     class Target { }
+
+    // then
+    expect(injector.resolve(Target)).toBeInstanceOf(Target);
+  });
+
+  test("register a class", () => {
+    // given
+    const injector = new Injector();
+
+    @Resolvable()
+    class Target { }
+
+    injector.register(asClass(Target));
 
     // then
     expect(injector.resolve(Target)).toBeInstanceOf(Target);
@@ -102,7 +113,7 @@ describe("Injector", () => {
       injector.resolve(Singleton);
 
       // then
-      expect(instanceCreated).toHaveBeenCalledTimes(2);
+      expect(instanceCreated).toHaveBeenCalledTimes(1);
     });
   });
 });

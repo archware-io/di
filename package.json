@@ -2,10 +2,11 @@
   "name": "@archware/di",
   "version": "0.1.0",
   "description": "Lightweight dependency injection for TypeScript",
-  "main": "build/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "tsc -p ./tsconfig.build.json && npm run postbuild",
+    "postbuild": "cp ./README.md ./package.json ./package-lock.json ./build",
     "lint": "eslint --fix"
   },
   "repository": {
