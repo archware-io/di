@@ -6,6 +6,12 @@ export class Injector {
   constructor(private registry = new Map<any, Descriptor<any>>(), private container = new Map<any, any>()) {}
 
   public register({ token, descriptor }: Registrable<any>) {
+    if (this.registry.has(token)) {
+      throw new Error(`
+        ${token.prototype?.constructor?.name ?? token} has already been registered.
+      `);
+    }
+
     this.registry.set(token, descriptor);
   }
 

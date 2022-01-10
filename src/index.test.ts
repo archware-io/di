@@ -116,4 +116,17 @@ describe("Injector", () => {
       expect(instanceCreated).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe("register", () => {
+    test("fail to register the same token twice", () => {
+      // given
+      const injector = new Injector();
+
+      // when
+      injector.register(asValue("PI", Math.PI));
+
+      // then
+      expect(() => injector.register(asValue("PI", Math.PI))).toThrowError();
+    });
+  });
 });
