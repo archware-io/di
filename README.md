@@ -138,6 +138,68 @@ injector.register(asValue('PI', Math.PI));
 const pi = injector.resolve('PI');
 ```
 
+### Providing a non-class value as a constructor parameter
+```ts
+import { Resolvable, Inject } from '@archware/di';
+import { asValue } from '@archware/di/register';
+
+// 1. Use asValue to correlate some arbitrary token to a value
+injector.register(asValue('NAME', 'John'));
+
+@Resolvable()
+class Person {
+  constructor(
+    // 2. Pass the token to @Inject()
+    @Inject('NAME') public name: string,
+  ) { }
+}
+
+const person = injector.resolve(Person); // person.name will be 'John'
+```
+
+### Overriding an interface implementation
+```ts
+import { Resolvable, Inject } from '@archware/di';
+import { asImplementation } from '@archware/di/register';
+
+interface Engine {
+  start(): void;
+}
+abstract class Engine { }
+
+@Resolvable()
+class V8Engine implements Engine {
+  start() { }
+}
+
+@Resolvable()
+class ElectricEngine implements Engine {
+  start() { }
+}
+
+@Resolvable()
+class Car {
+  constructor(engine: Engine) { }
+}
+
+@Resolvable()
+class SportsCar {
+  constructor(
+    // 1. Provide the chosen implementation to @Inject() decorator
+    @Inject(V8Engine) engine: Engine
+  ) { }
+}
+
+// This will be overriden by @Inject()
+injector.register(asImplementation(Engine, ElectricEngine));
+
+// 2. Get the car with V8Engine
+injector.resolve(SportsCar);
+
+// This will still return a Car with ElectricEngine
+injector.resolve(Car);
+```
+
 ## Support
 We encourage you to create an issue if you want to:
 - raise a bug

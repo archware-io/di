@@ -1,4 +1,4 @@
-import { Injector, Resolvable } from './index';
+import { Injector, Resolvable, Inject } from './index';
 import { asValue, asImplementation, asClass } from './register';
 
 describe("Injector", () => {
@@ -71,6 +71,53 @@ describe("Injector", () => {
 
     // then
     expect(injector.resolve(Pet)).toBeInstanceOf(Dog);
+  });
+
+  describe("@Inject", () => {
+    test("override inferred parameters", () => {
+      // given
+      const injector = new Injector();
+
+      interface Engine { }
+      abstract class Engine { }
+
+      @Resolvable()
+      class ElectricEngine implements Engine { }
+
+      @Resolvable()
+      class V8Engine implements Engine { }
+
+      @Resolvable()
+      class Car {
+        constructor(
+          // when
+          @Inject(V8Engine) public engine: Engine
+        ) { }
+      }
+
+      injector.register(asImplementation(Engine, ElectricEngine));
+
+      // then
+      expect(injector.resolve(Car).engine).toBeInstanceOf(V8Engine);
+    });
+
+    test("couple with asValue() to provide arbitrary type", () => {
+      // given
+      const injector = new Injector();
+
+      injector.register(asValue("NAME", "John"));
+
+      @Resolvable()
+      class Person {
+        constructor(
+          // when
+          @Inject("NAME") public name: string,
+        ) { }
+      }
+
+      // then
+      expect(injector.resolve(Person).name).toStrictEqual("John");
+    });
   });
 
   describe("singletons", () => {
