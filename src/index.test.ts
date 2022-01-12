@@ -74,7 +74,7 @@ describe("Injector", () => {
   });
 
   describe("@Inject", () => {
-    test("override paramtypes", () => {
+    test("override inferred parameters", () => {
       // given
       const injector = new Injector();
 
@@ -110,10 +110,12 @@ describe("Injector", () => {
       @Resolvable()
       class Person {
         constructor(
+          // when
           @Inject("NAME") public name: string,
         ) { }
       }
 
+      // then
       expect(injector.resolve(Person).name).toStrictEqual("John");
     });
   });
