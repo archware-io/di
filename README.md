@@ -1,5 +1,11 @@
 ![banner](https://raw.githubusercontent.com/archware-io/di/master/assets/Banner.png "Dependency Injection by Archware")
 
+![GitHub](https://img.shields.io/github/license/archware-io/di)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=archware-io_di&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=archware-io_di)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=archware-io_di&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=archware-io_di)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=archware-io_di&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=archware-io_di)
+![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@archware/di)
+
 ## About
 `@archware/di` is a lightweight inversion of control (IoC) solution for TypeScript projects.
 It designed to work seamlessly with object oriented architectures.
