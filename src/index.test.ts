@@ -1,24 +1,24 @@
 import { Injector, Resolvable, Inject } from './index';
 import { asValue, asImplementation, asClass } from './register';
 
-describe("Injector", () => {
-  test("resolve a class", () => {
+describe('Injector', () => {
+  test('resolve a class', () => {
     // given
     const injector = new Injector();
 
     @Resolvable()
-    class Target { }
+    class Target {}
 
     // then
     expect(injector.resolve(Target)).toBeInstanceOf(Target);
   });
 
-  test("register a class", () => {
+  test('register a class', () => {
     // given
     const injector = new Injector();
 
     @Resolvable()
-    class Target { }
+    class Target {}
 
     injector.register(asClass(Target));
 
@@ -26,21 +26,21 @@ describe("Injector", () => {
     expect(injector.resolve(Target)).toBeInstanceOf(Target);
   });
 
-  test("fail resolving class when not decorated", () => {
+  test('fail resolving class when not decorated', () => {
     // given
     const injector = new Injector();
 
-    class Target { }
+    class Target {}
 
     // then
     expect(() => injector.resolve(Target)).toThrow();
   });
 
-  test("resolve a value", () => {
+  test('resolve a value', () => {
     // given
     const injector = new Injector();
 
-    class Target { }
+    class Target {}
 
     // when
     injector.register(asValue(Target, new Target()));
@@ -49,7 +49,7 @@ describe("Injector", () => {
     expect(injector.resolve(Target)).toBeInstanceOf(Target);
   });
 
-  test("resolve an implementation", () => {
+  test('resolve an implementation', () => {
     // given
     const injector = new Injector();
 
@@ -57,7 +57,7 @@ describe("Injector", () => {
       speak(): string;
     }
 
-    abstract class Pet { }
+    abstract class Pet {}
 
     @Resolvable()
     class Dog implements Pet {
@@ -73,26 +73,27 @@ describe("Injector", () => {
     expect(injector.resolve(Pet)).toBeInstanceOf(Dog);
   });
 
-  describe("@Inject", () => {
-    test("override inferred parameters", () => {
+  describe('@Inject', () => {
+    test('override inferred parameters', () => {
       // given
       const injector = new Injector();
 
-      interface Engine { }
-      abstract class Engine { }
+      interface Engine {}
+
+      abstract class Engine {}
 
       @Resolvable()
-      class ElectricEngine implements Engine { }
+      class ElectricEngine implements Engine {}
 
       @Resolvable()
-      class V8Engine implements Engine { }
+      class V8Engine implements Engine {}
 
       @Resolvable()
       class Car {
         constructor(
           // when
-          @Inject(V8Engine) public engine: Engine
-        ) { }
+          @Inject(V8Engine) public engine: Engine,
+        ) {}
       }
 
       injector.register(asImplementation(Engine, ElectricEngine));
@@ -101,27 +102,27 @@ describe("Injector", () => {
       expect(injector.resolve(Car).engine).toBeInstanceOf(V8Engine);
     });
 
-    test("couple with asValue() to provide arbitrary type", () => {
+    test('couple with asValue() to provide arbitrary type', () => {
       // given
       const injector = new Injector();
 
-      injector.register(asValue("NAME", "John"));
+      injector.register(asValue('NAME', 'John'));
 
       @Resolvable()
       class Person {
         constructor(
           // when
-          @Inject("NAME") public name: string,
-        ) { }
+          @Inject('NAME') public name: string,
+        ) {}
       }
 
       // then
-      expect(injector.resolve(Person).name).toStrictEqual("John");
+      expect(injector.resolve(Person).name).toStrictEqual('John');
     });
   });
 
-  describe("singletons", () => {
-    test("if not declared singleton, return new instances", () => {
+  describe('singletons', () => {
+    test('if not declared singleton, return new instances', () => {
       // given
       const injector = new Injector();
       const instanceCreated = jest.fn();
@@ -141,7 +142,7 @@ describe("Injector", () => {
       expect(instanceCreated).toHaveBeenCalledTimes(2);
     });
 
-    test("if declared singleton, return the same instance", () => {
+    test('if declared singleton, return the same instance', () => {
       // given
       const injector = new Injector();
       const instanceCreated = jest.fn();
