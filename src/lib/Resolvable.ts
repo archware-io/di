@@ -1,20 +1,18 @@
 import '@abraham/reflection';
 import { ResolvableOptions, setOptions } from './ResolvableOptions';
 
-export const Resolvable =
-  (options?: ResolvableOptions): ClassDecorator =>
-  (target: any) => {
-    if (options !== undefined) {
-      setOptions(target, options);
-    }
+export const Resolvable = (options?: ResolvableOptions) => (target: new (...args: any[]) => any) => {
+  if (options !== undefined) {
+    setOptions(target, options);
+  }
 
-    setDecorated(target);
-  };
+  setResolvable(target);
+};
 
-const IS_DECORATED = Symbol('IS_DECORATED');
+const IS_RESOLVABLE = Symbol('IS_RESOLVABLE');
 
-const setDecorated = (target: any) => {
-  Object.defineProperty(target, IS_DECORATED, {
+const setResolvable = (target: new (...args: any[]) => any) => {
+  Object.defineProperty(target, IS_RESOLVABLE, {
     value: true,
     configurable: false,
     writable: false,
@@ -22,6 +20,6 @@ const setDecorated = (target: any) => {
   });
 };
 
-export const isDecorated = (target: any): boolean => {
-  return target[IS_DECORATED] === true;
+export const isResolvable = (target: any): target is new (...args: any[]) => any => {
+  return target[IS_RESOLVABLE] === true;
 };

@@ -1,5 +1,6 @@
 import type { Registrable } from './Registrable';
 import type { Descriptor } from './Descriptor';
+import { ClassToken } from './ClassToken';
 import { asClass } from './asClass';
 
 export class Injector {
@@ -9,18 +10,17 @@ export class Injector {
     this.registry.set(token, descriptor);
   }
 
-  public resolve<T>(target: abstract new (...args: any[]) => T): T;
-  public resolve<T>(target: any): T {
-    if (this.container.has(target)) {
-      return this.container.get(target);
+  public resolve<TResolved, TToken = unknown>(token: TToken): TToken extends ClassToken<infer T> ? T : TResolved {
+    if (this.container.has(token)) {
+      return this.container.get(token);
     }
 
-    const { factory, dependencies, isSingleton } = this.registry.get(target) ?? asClass(target).descriptor;
+    const { factory, dependencies, isSingleton } = this.registry.get(token) ?? asClass(token).descriptor;
 
     const instance = factory(...dependencies.map((dependency) => this.resolve(dependency)));
 
     if (isSingleton) {
-      this.container.set(target, instance);
+      this.container.set(token, instance);
     }
 
     return instance;
