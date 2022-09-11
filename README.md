@@ -12,8 +12,6 @@ It designed to work seamlessly with object oriented architectures.
 It aims to be flexible, but easy to understand.
 It can be used in any modern environment, be it browser or Node.
 
-It was created by and is actively used at [archware.io](https://archware.io) software house.
-
 ## Motivation
 One of the strongest advantages of object oriented programming is interfaces.
 They allow defining strong architectural boundaries, which is the cornerstone
@@ -220,6 +218,9 @@ Thanks for considering to contribute!
 Feel free to drop us a line at `marek@archware.io`
 
 Contributing guide will be prepared soon.
+
+## Author
+Created by [archware.io software house](https://www.archware.io)
 
 ## License
 MIT, Copyright &copy; 2022 Archware Limited and contributors
