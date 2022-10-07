@@ -1,6 +1,6 @@
 {
   "name": "@archware/di",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Lightweight dependency injection for TypeScript",
   "main": "index.js",
   "scripts": {
