@@ -26,14 +26,14 @@ describe('Injector', () => {
     expect(injector.resolve(Target)).toBeInstanceOf(Target);
   });
 
-  test('fail resolving class when not decorated', () => {
+  test('throw if not decorated', () => {
     // given
     const injector = new Injector();
 
     class Target {}
 
     // then
-    expect(() => injector.resolve(Target)).toThrow();
+    expect(() => injector.resolve(Target)).toThrowErrorMatchingSnapshot();
   });
 
   test('resolve a value', () => {
@@ -162,6 +162,66 @@ describe('Injector', () => {
 
       // then
       expect(instanceCreated).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('inheritance', () => {
+    test('resolve with inherited dependencies if constructor not overriden', () => {
+      // given
+      @Resolvable()
+      class Dependency {}
+
+      @Resolvable()
+      class Parent {
+        constructor(public dependency: Dependency) {}
+      }
+
+      @Resolvable()
+      class Child extends Parent {}
+
+      const injector = new Injector();
+
+      // when
+      const child = injector.resolve(Child);
+
+      // then
+      expect(child.dependency).toBeInstanceOf(Dependency);
+    });
+
+    test('resolve with Child dependencies if constructor overriden', () => {
+      // given
+      @Resolvable()
+      class Dependency {}
+
+      @Resolvable()
+      class Parent {}
+
+      @Resolvable()
+      class Child extends Parent {
+        constructor(public dependency: Dependency) {
+          super();
+        }
+      }
+
+      const injector = new Injector();
+
+      // when
+      const child = injector.resolve(Child);
+
+      expect(child.dependency).toBeInstanceOf(Dependency);
+    });
+
+    test('throw if parent class not decorated', () => {
+      // given
+      class Parent {}
+
+      @Resolvable()
+      class Child extends Parent {}
+
+      const injector = new Injector();
+
+      // then
+      expect(() => injector.resolve(Child)).toThrowErrorMatchingSnapshot();
     });
   });
 });

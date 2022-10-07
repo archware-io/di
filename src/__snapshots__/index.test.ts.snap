@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Injector inheritance throw if parent class not decorated 1`] = `"Parent class Parent of Child has to be decorated with @Resolvable()"`;
+
+exports[`Injector throw if not decorated 1`] = `
+"
+      Cannot infer constructor parameters for Target.
+      It has to be decorated with @Resolvable()
+    "
+`;
