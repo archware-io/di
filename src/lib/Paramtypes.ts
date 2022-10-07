@@ -1,4 +1,5 @@
 import { isDecorated } from './Resolvable';
+import { getConstructorName } from './getConstructorName';
 
 const getParamtypes = (target: any): any[] => {
   return Reflect.getMetadata('design:paramtypes', target) ?? [];
@@ -7,8 +8,8 @@ const getParamtypes = (target: any): any[] => {
 export const mustGetParamtypes = (target: any): any[] => {
   if (!isDecorated(target)) {
     throw new Error(`
-      Cannot infer constructor parameters for ${target.prototype.constructor.name}.
-      It has to be decorated as @Resolvable()
+      Cannot infer constructor parameters for ${getConstructorName(target)}.
+      It has to be decorated with @Resolvable()
     `);
   }
 
