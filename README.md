@@ -1,5 +1,3 @@
-![banner](https://raw.githubusercontent.com/archware-io/di/master/assets/Banner.png "Dependency Injection by Archware")
-
 ![GitHub](https://img.shields.io/github/license/archware-io/di)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=archware-io_di&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=archware-io_di)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=archware-io_di&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=archware-io_di)
